@@ -1,25 +1,25 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <conio.h>
 #include<thread>
 #include<chrono>
 #include<windows.h>
 using namespace std;
-using namespace std::literals::chrono_literals;//для исполизования сек,мин и тд
+using namespace std::literals::chrono_literals;//РґР»СЏ РёСЃРїРѕР»РёР·РѕРІР°РЅРёСЏ СЃРµРє,РјРёРЅ Рё С‚Рґ
 
-//#define MIN_TANK_VOLUME 20//глобальная переменная
+//#define MIN_TANK_VOLUME 20//РіР»РѕР±Р°Р»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ
 //#define MAX_TANK_VOLUME 80
-//# показывае что дальше идет деректива
-//директива - это указание компилятору на выполнение некоторых действий
-// #include указывает компилятору что к нашему файлу нужно подключить другой файл
-//#define создает макроопределение типа ИМЯ ТИПА
-// и везде где он видет вставляет такое значение
+//# РїРѕРєР°Р·С‹РІР°Рµ С‡С‚Рѕ РґР°Р»СЊС€Рµ РёРґРµС‚ РґРµСЂРµРєС‚РёРІР°
+//РґРёСЂРµРєС‚РёРІР° - СЌС‚Рѕ СѓРєР°Р·Р°РЅРёРµ РєРѕРјРїРёР»СЏС‚РѕСЂСѓ РЅР° РІС‹РїРѕР»РЅРµРЅРёРµ РЅРµРєРѕС‚РѕСЂС‹С… РґРµР№СЃС‚РІРёР№
+// #include СѓРєР°Р·С‹РІР°РµС‚ РєРѕРјРїРёР»СЏС‚РѕСЂСѓ С‡С‚Рѕ Рє РЅР°С€РµРјСѓ С„Р°Р№Р»Сѓ РЅСѓР¶РЅРѕ РїРѕРґРєР»СЋС‡РёС‚СЊ РґСЂСѓРіРѕР№ С„Р°Р№Р»
+//#define СЃРѕР·РґР°РµС‚ РјР°РєСЂРѕРѕРїСЂРµРґРµР»РµРЅРёРµ С‚РёРїР° РРњРЇ РўРРџРђ
+// Рё РІРµР·РґРµ РіРґРµ РѕРЅ РІРёРґРµС‚ РІСЃС‚Р°РІР»СЏРµС‚ С‚Р°РєРѕРµ Р·РЅР°С‡РµРЅРёРµ
 #define Enter 13
 #define Esc 27
 
 class Tank
 {
-	static const int MIN_TANK_VOLUME = 20;//глобальная переменная которая выделяет память только в классе
-	static const int MAX_TANK_VOLUME = 80;// а не в каждом объекте
+	static const int MIN_TANK_VOLUME = 20;//РіР»РѕР±Р°Р»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РєРѕС‚РѕСЂР°СЏ РІС‹РґРµР»СЏРµС‚ РїР°РјСЏС‚СЊ С‚РѕР»СЊРєРѕ РІ РєР»Р°СЃСЃРµ
+	static const int MAX_TANK_VOLUME = 80;// Р° РЅРµ РІ РєР°Р¶РґРѕРј РѕР±СЉРµРєС‚Рµ
 	const int VOLUME;
 	double fuel_level;
 public:
@@ -94,11 +94,11 @@ public:
 	{
 		return this->CONSUMPTION;
 	}
-	//1 - 60 км / ч -> 0, 0020 л / сек
-	//	. 61 - 100 км / ч -> 0, 0014 л / сек
-	//	. 101 - 140 км / ч -> 0, 0020 л / сек
-	//	. 141 - 200 км / ч -> 0, 0025 л / сек.вторая
-	//	201 - 250 км / ч -> 0, 0030 л / с
+	//1 - 60 РєРј / С‡ -> 0, 0020 Р» / СЃРµРє
+	//	. 61 - 100 РєРј / С‡ -> 0, 0014 Р» / СЃРµРє
+	//	. 101 - 140 РєРј / С‡ -> 0, 0020 Р» / СЃРµРє
+	//	. 141 - 200 РєРј / С‡ -> 0, 0025 Р» / СЃРµРє.РІС‚РѕСЂР°СЏ
+	//	201 - 250 РєРј / С‡ -> 0, 0030 Р» / СЃ
 	double get_consumption_per_second(int speed)
 	{
 		consumption_per_second = CONSUMPTION * 3.0e-5;
@@ -180,7 +180,7 @@ public:
 	void get_in()
 	{
 		driver_inside = true;
-		threads.panel_thread = std::thread(&CAR::panel, this);//запускаем panel() в потоке panel_thread
+		threads.panel_thread = std::thread(&CAR::panel, this);//Р·Р°РїСѓСЃРєР°РµРј panel() РІ РїРѕС‚РѕРєРµ panel_thread
 	}
 	void get_out()
 	{
@@ -217,7 +217,7 @@ public:
 				{
 				case Enter: driver_inside ? get_out() : get_in();
 					break;
-				case 'I':case'i'://ignition -зажигание
+				case 'I':case'i'://ignition -Р·Р°Р¶РёРіР°РЅРёРµ
 					engine.started() ? stop_engine() : start_engine();
 					break;
 				case 'F':case'f':
@@ -231,7 +231,7 @@ public:
 					}
 					break;
 				case'W':case'w':
-					acсelerate();
+					acСЃelerate();
 					break;
 				case'S':case's':
 					slow_down();
@@ -252,7 +252,7 @@ public:
 	}
 	void engine_edle()
 	{
-		//холостой ход двигателя
+		//С…РѕР»РѕСЃС‚РѕР№ С…РѕРґ РґРІРёРіР°С‚РµР»СЏ
 		while (engine.started() && tank.give_Fuel(engine.get_consumption_per_second(speed)))
 		{
 			std::this_thread::sleep_for(1s);
@@ -266,7 +266,7 @@ public:
 			std::this_thread::sleep_for(1s);
 		}
 	}
-	void acсelerate()
+	void acСЃelerate()
 	{
 		if (speed < MAX_SPEED && engine.started())
 		{
@@ -306,7 +306,7 @@ public:
 	}
 	void panel()
 	{
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);//Получаем обработчик окна консоли
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);//РџРѕР»СѓС‡Р°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРє РѕРєРЅР° РєРѕРЅСЃРѕР»Рё
 		while (driver_inside)
 		{
 			system("CLS");
@@ -315,7 +315,7 @@ public:
 			cout << "Fuel level:\t" << tank.getFuel() << " liters\t";
 			if (tank.getFuel() < 5)
 			{
-				SetConsoleTextAttribute(hConsole, 0xCF);//0xCF-красный фон"С","F"-белые буквы
+				SetConsoleTextAttribute(hConsole, 0xCF);//0xCF-РєСЂР°СЃРЅС‹Р№ С„РѕРЅ"РЎ","F"-Р±РµР»С‹Рµ Р±СѓРєРІС‹
 				cout << "LOW FUEL";
 				SetConsoleTextAttribute(hConsole, 0x07);
 			}
@@ -333,19 +333,19 @@ public:
 };
 //#define TANK_CHECK
 //#define ENGINE_CHECK 
-//Некоторые макросы дают тоьлко имя, и не дают никокого значения
-//это #ifdef .. #endif
+//РќРµРєРѕС‚РѕСЂС‹Рµ РјР°РєСЂРѕСЃС‹ РґР°СЋС‚ С‚РѕСЊР»РєРѕ РёРјСЏ, Рё РЅРµ РґР°СЋС‚ РЅРёРєРѕРєРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
+//СЌС‚Рѕ #ifdef .. #endif
 int main()
 {
 	setlocale(LC_ALL, "");
 #if defined TANK_CHECK
-	//если определено TANK_CHECK, тоследующий код до дериктивы #endif будет виден компилятор 
+	//РµСЃР»Рё РѕРїСЂРµРґРµР»РµРЅРѕ TANK_CHECK, С‚РѕСЃР»РµРґСѓСЋС‰РёР№ РєРѕРґ РґРѕ РґРµСЂРёРєС‚РёРІС‹ #endif Р±СѓРґРµС‚ РІРёРґРµРЅ РєРѕРјРїРёР»СЏС‚РѕСЂ 
 	Tank tank(40);
 	tank.info();
 	do
 	{
 		int fuel;
-		cout << "Введите объем топлива:"; cin >> fuel;
+		cout << "Р’РІРµРґРёС‚Рµ РѕР±СЉРµРј С‚РѕРїР»РёРІР°:"; cin >> fuel;
 		tank.fill(fuel);
 		tank.info();
 	} while (_getch() != 27);
